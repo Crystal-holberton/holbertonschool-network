@@ -1,10 +1,4 @@
 #!/usr/bin/env bash
 # script that configures an Ubuntu server
-sudo cp /etc/hosts ~/temp
-sudo sed -i '/127.0.0.1\s\+localhost/s/127.0.0.1/127.0.0.2/' ~/temp
-if ! grep -q "8.8.8.8 facebook.com" ~/temp; then
-    echo "8.8.8.8 facebook.com" | sudo tee -a ~/temp > /dev/null
-fi
-sudo cp -f ~/temp /etc/hosts
-rm ~/temp
-echo "Configuration updated. locolhost now resolves to 127.0.0.2, and facebook.com resolves to 8.8.8.8."
+sudo sed -i '/localhost/ s/^127.0.0.1/127.0.0.2/' /etc/hosts
+echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts
